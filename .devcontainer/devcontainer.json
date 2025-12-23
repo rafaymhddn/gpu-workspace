@@ -1,0 +1,41 @@
+{
+  "name": "gpu-workspace",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "gpu-workspace",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "root",
+  "features": {},
+  "runServices": [
+    "gpu-workspace"
+  ],
+  "overrideCommand": false,
+  "shutdownAction": "stopCompose",
+  "postCreateCommand": "git config --global --add safe.directory /workspace || true",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "github.vscode-pull-request-github",
+        "Anysphere.cursor",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers"
+      ]
+    }
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "hostRequirements": {
+    "gpu": true
+  },
+  "forwardPorts": [
+    8888,
+    9000,
+    6006,
+    7860,
+    8080
+  ]
+}
+

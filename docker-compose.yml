@@ -1,21 +1,27 @@
-version: "3"
+version: "3.9"
 services:
-
   gpu-workspace:
+    container_name: gpu-workspace
     build: .
-    # image: ghcr.io/vemonet/gpu-workspace:main
-    # Enable GPUs in this container:
+    restart: unless-stopped
+    working_dir: /workspace
+    # Enable GPUs in this container (compose supports this under deploy.resources)
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
               capabilities: [gpu]
-              count: 1    # ⚠️ Change the GPU count if you want to give access to more GPUs
-    # Shared memory size for the container
-    shm_size: '4g'
-    # Mount persistent volumes in the container workspace to not lose your data
+              count: 1    # adjust if you want to expose more GPUs
+    shm_size: "32g"      # increase shared memory for dataloaders/NCCL
     volumes:
-    - ./:/app
+      - ./:/workspace    # persist workspace data
+      - ${SSH_AUTH_SOCK}:/ssh-agent  # forward local SSH agent
+      - ~/.gitconfig:/root/.gitconfig:ro                 # uncomment to use host git config
+      # - ~/.cache/huggingface:/root/.cache/huggingface    # optional HF cache
+      # - ~/.docker/config.json:/root/.docker/config.json:ro # optional Docker creds
     environment:
-      TZ: Europe/Amsterdam
+      TZ: Europe/Berlin
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      SSH_AUTH_SOCK: /ssh-agent
