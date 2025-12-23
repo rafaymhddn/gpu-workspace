@@ -12,16 +12,16 @@ services:
           devices:
             - driver: nvidia
               capabilities: [gpu]
-              count: 1    # adjust if you want to expose more GPUs
+              count: 1    # set to number of GPUs to expose; use "all" only if supported
     shm_size: "32g"      # increase shared memory for dataloaders/NCCL
     volumes:
-      - ./:/workspace    # persist workspace data
-      - ${SSH_AUTH_SOCK:-/tmp/ssh-agent}:/ssh-agent  # forward local SSH agent (set SSH_AUTH_SOCK to real path)
-      - ~/.gitconfig:/root/.gitconfig:ro                 # use host git config
+      - ../:/workspace    # persist workspace data (updated path since docker-compose.yml is now in .devcontainer/)
+      - ${SSH_AUTH_SOCK:-/dev/null}:/ssh-agent  # forward local SSH agent when set; /dev/null as safe default
+      # Note: .gitconfig is automatically copied by Dev Containers extension, no need to mount it
       # - ~/.cache/huggingface:/root/.cache/huggingface    # optional HF cache
       # - ~/.docker/config.json:/root/.docker/config.json:ro # optional Docker creds
     environment:
       TZ: Europe/Berlin
       NVIDIA_VISIBLE_DEVICES: all
-      NVIDIA_DRIVER_CAPABILITIES: compute,utility #
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
       SSH_AUTH_SOCK: /ssh-agent

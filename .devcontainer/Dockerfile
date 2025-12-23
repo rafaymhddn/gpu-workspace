@@ -29,3 +29,4 @@ ENV SHELL=/bin/zsh
 WORKDIR /app
 
 ENTRYPOINT ["sleep", "infinity"]
+
