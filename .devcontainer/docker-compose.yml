@@ -17,7 +17,7 @@ services:
     volumes:
       - ../:/workspace    # persist workspace data (updated path since docker-compose.yml is now in .devcontainer/)
       - ${SSH_AUTH_SOCK:-/dev/null}:/ssh-agent  # forward local SSH agent when set; /dev/null as safe default
-      # Note: .gitconfig is automatically copied by Dev Containers extension, no need to mount it
+      - ${HOME}/.gitconfig:/tmp/host-gitconfig:ro  # mount host gitconfig to copy it (read-only)
       # - ~/.cache/huggingface:/root/.cache/huggingface    # optional HF cache
       # - ~/.docker/config.json:/root/.docker/config.json:ro # optional Docker creds
     environment:
