@@ -1,0 +1,60 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            zto7rdugaxiw8jjnv3keglrda3z6j73i:
+                codePath: tb_cnn_demo.py
+                codePathLocal: tb_cnn_demo.py
+                cpu_count: 24
+                cpu_count_logical: 32
+                cudaVersion: "12.6"
+                disk:
+                    /:
+                        total: "1966736678912"
+                        used: "253443751936"
+                email: rafay.mhddn@gmail.com
+                executable: /usr/bin/python
+                git:
+                    commit: 079785a47c97623d896fd1889769c988b64f76b2
+                    remote: https://github.com/rafaymhddn/gpu-workspace.git
+                gpu: NVIDIA GeForce RTX 4090
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 16384
+                      memoryTotal: "25757220864"
+                      name: NVIDIA GeForce RTX 4090
+                      uuid: GPU-4342f105-9a79-f476-ebd1-ecb4c88963a4
+                host: 87a4598a6276
+                memory:
+                    total: "134790598656"
+                os: Linux-6.11.0-29-generic-x86_64-with-glibc2.35
+                program: /workspace/tb_cnn_demo.py
+                python: CPython 3.10.12
+                root: /workspace
+                startedAt: "2025-12-23T13:39:16.668348Z"
+                writerId: zto7rdugaxiw8jjnv3keglrda3z6j73i
+        m: []
+        python_version: 3.10.12
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 1
+                - 2
+                - 16
+                - 61
+            "4": 3.10.12
+            "5": 0.23.1
+            "12": 0.23.1
+            "13": linux-x86_64
+batch_size:
+    value: 64
+device:
+    value: cuda
+epochs:
+    value: 50
+lr:
+    value: 0.001

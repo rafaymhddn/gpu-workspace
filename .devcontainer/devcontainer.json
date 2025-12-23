@@ -3,7 +3,7 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "gpu-workspace",
   "workspaceFolder": "/workspace",
-  "remoteUser": "root",
+  //"remoteUser": "root", // uncomment this if you want to use the root user
   "features": {},
   "runServices": [
     "gpu-workspace"
