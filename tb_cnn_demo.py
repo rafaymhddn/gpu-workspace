@@ -23,7 +23,9 @@ try:
 except ImportError:  # pragma: no cover - optional dep
     wandb = None  # type: ignore
 
+
 class TinyCNN(nn.Module):
+
     def __init__(self, num_classes: int = 10):
         super().__init__()
         self.net = nn.Sequential(
