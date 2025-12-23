@@ -25,3 +25,10 @@ services:
       NVIDIA_VISIBLE_DEVICES: all
       NVIDIA_DRIVER_CAPABILITIES: compute,utility
       SSH_AUTH_SOCK: /ssh-agent
+    ports:
+      # Common dev UIs
+      - "8888:8888"   # Jupyter/Lab
+      - "9000:9000"   # Custom app/debug
+      - "6006:6006"   # TensorBoard
+      - "7860:7860"   # Gradio/Spaces
+      - "8080:8080"   # Generic HTTP service
