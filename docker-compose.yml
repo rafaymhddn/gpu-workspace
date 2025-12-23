@@ -16,12 +16,12 @@ services:
     shm_size: "32g"      # increase shared memory for dataloaders/NCCL
     volumes:
       - ./:/workspace    # persist workspace data
-      - ${SSH_AUTH_SOCK}:/ssh-agent  # forward local SSH agent
-      - ~/.gitconfig:/root/.gitconfig:ro                 # uncomment to use host git config
+      - ${SSH_AUTH_SOCK:-/tmp/ssh-agent}:/ssh-agent  # forward local SSH agent (set SSH_AUTH_SOCK to real path)
+      - ~/.gitconfig:/root/.gitconfig:ro                 # use host git config
       # - ~/.cache/huggingface:/root/.cache/huggingface    # optional HF cache
       # - ~/.docker/config.json:/root/.docker/config.json:ro # optional Docker creds
     environment:
       TZ: Europe/Berlin
       NVIDIA_VISIBLE_DEVICES: all
-      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility #
       SSH_AUTH_SOCK: /ssh-agent

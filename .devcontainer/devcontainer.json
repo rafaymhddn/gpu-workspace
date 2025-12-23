@@ -10,7 +10,23 @@
   ],
   "overrideCommand": false,
   "shutdownAction": "stopCompose",
-  "postCreateCommand": "git config --global --add safe.directory /workspace || true",
+  "postCreateCommand": [
+    "git config --system --add safe.directory /workspace || true",
+    "{",
+    "  mkdir -p /root/.ssh;",
+    "  cat >> /root/.zprofile <<'EOF'",
+    "  if [ -z \"$SSH_AUTH_SOCK\" ]; then",
+    "    RUNNING_AGENT=\"$(ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]')\"",
+    "    if [ \"$RUNNING_AGENT\" = \"0\" ]; then",
+    "      ssh-agent -s > $HOME/.ssh/ssh-agent 2>/dev/null",
+    "    fi",
+    "    [ -f \"$HOME/.ssh/ssh-agent\" ] && eval \"$(cat $HOME/.ssh/ssh-agent)\" >/dev/null",
+    "    ssh-add $HOME/.ssh/id_ed25519>/dev/null",
+    "  fi",
+    "EOF",
+    "  [ -f \"$HOME/.ssh/ssh-agent\" ] && eval \"$(cat $HOME/.ssh/ssh-agent)\" >/dev/null && ssh-add $HOME/.ssh/id_ed25519>/dev/null",
+    "}"
+  ],
   "customizations": {
     "vscode": {
       "settings": {
@@ -20,7 +36,6 @@
         "ms-python.python",
         "ms-toolsai.jupyter",
         "github.vscode-pull-request-github",
-        "Anysphere.cursor",
         "ms-azuretools.vscode-docker",
         "ms-vscode-remote.remote-containers"
       ]

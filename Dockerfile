@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=nvcr.io/nvidia/cuda-dl-base:25.05-cuda12.9-devel-ubuntu24.04
+ARG BASE_IMAGE=nvcr.io/nvidia/pytorch:24.10-py3
 FROM ${BASE_IMAGE}
 
 LABEL org.opencontainers.image.description "Docker image for GPU Cluster"
